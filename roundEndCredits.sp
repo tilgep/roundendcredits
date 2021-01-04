@@ -9,21 +9,21 @@ bool g_bVIPLoaded = false;
 char currentMap[128] = "";
 
 ConVar  g_cVVIPBonus,
-		g_cVMinPlayers,
-		g_cVMedMapMinPlayers,
-		g_cVBigMapMinPlayers,
-		g_cVSmallMapCredits,
-		g_cVMedMapCredits,
-		g_cVBigMapCredits;
+	g_cVMinPlayers,
+	g_cVMedMapMinPlayers,
+	g_cVBigMapMinPlayers,
+	g_cVSmallMapCredits,
+	g_cVMedMapCredits,
+	g_cVBigMapCredits;
 
 //Set default values incase convars dont load for whatever reason
 int g_iVIPBonus = 50,
-	g_iMinPlayers = 10,
-	g_iMedMapMinPlayers = 20,
-	g_iBigMapMinPlayers = 30,
-	g_iSmallMapCredits = 25,
-	g_iMedMapCredits = 50,
-	g_iBigMapCredits = 75;
+    g_iMinPlayers = 10,
+    g_iMedMapMinPlayers = 20,
+    g_iBigMapMinPlayers = 30,
+    g_iSmallMapCredits = 25,
+    g_iMedMapCredits = 50,
+    g_iBigMapCredits = 75;
 
 public Plugin myinfo =
 {
@@ -38,29 +38,29 @@ public void OnPluginStart()
 {
 	HookEvent("round_end", Event_RoundEnd, EventHookMode_Post);
 
-	g_cVVIPBonus = 			CreateConVar("rndEnd_creds_vip_bonus", "50", "Number of extra credits VIPs get if they win as CT");
-	g_cVMinPlayers = 		CreateConVar("rndEnd_creds_minplayers", "10", "Minimum number of players needed to give out credits");
+	g_cVVIPBonus = 		CreateConVar("rndEnd_creds_vip_bonus", "50", "Number of extra credits VIPs get if they win as CT");
+	g_cVMinPlayers = 	CreateConVar("rndEnd_creds_minplayers", "10", "Minimum number of players needed to give out credits");
 	g_cVMedMapMinPlayers = 	CreateConVar("rndEnd_creds_medmap_min", "20", "If the mapchooser MinPlayers is higher than this, it will use rndEnd_cred_med_credits");
 	g_cVBigMapMinPlayers = 	CreateConVar("rndEnd_creds_bigmap_min", "30", "If the mapchooser MinPlayers is higher than this, it will use rndEnd_cred_big_credits");
 	g_cVSmallMapCredits = 	CreateConVar("rndEnd_creds_small_credits", "25", "Number of credits a player gets if they win a small map");
-	g_cVMedMapCredits =		CreateConVar("rndEnd_creds_med_credits", "50", "Number of credits a player gets if they win a medium map");
+	g_cVMedMapCredits =	CreateConVar("rndEnd_creds_med_credits", "50", "Number of credits a player gets if they win a medium map");
 	g_cVBigMapCredits = 	CreateConVar("rndEnd_creds_big_credits", "75", "Number of credits a player gets if they win a big map");
 
-	g_iVIPBonus = 			GetConVarInt(g_cVVIPBonus);
-	g_iMinPlayers = 		GetConVarInt(g_cVMinPlayers);
+	g_iVIPBonus = 		GetConVarInt(g_cVVIPBonus);
+	g_iMinPlayers = 	GetConVarInt(g_cVMinPlayers);
 	g_iMedMapMinPlayers = 	GetConVarInt(g_cVMedMapMinPlayers);
 	g_iBigMapMinPlayers = 	GetConVarInt(g_cVBigMapMinPlayers);
 	g_iSmallMapCredits = 	GetConVarInt(g_cVSmallMapCredits);
-	g_iMedMapCredits =		GetConVarInt(g_cVMedMapCredits);
-	g_iBigMapCredits =		GetConVarInt(g_cVBigMapCredits);
+	g_iMedMapCredits =	GetConVarInt(g_cVMedMapCredits);
+	g_iBigMapCredits =	GetConVarInt(g_cVBigMapCredits);
 
-	HookConVarChange(g_cVVIPBonus, 			Cvar_Changed);
-	HookConVarChange(g_cVMinPlayers, 		Cvar_Changed);
+	HookConVarChange(g_cVVIPBonus, 		Cvar_Changed);
+	HookConVarChange(g_cVMinPlayers, 	Cvar_Changed);
 	HookConVarChange(g_cVMedMapMinPlayers, 	Cvar_Changed);
 	HookConVarChange(g_cVBigMapMinPlayers, 	Cvar_Changed);
 	HookConVarChange(g_cVSmallMapCredits, 	Cvar_Changed);
-	HookConVarChange(g_cVMedMapCredits, 		Cvar_Changed);
-	HookConVarChange(g_cVBigMapCredits, 		Cvar_Changed);
+	HookConVarChange(g_cVMedMapCredits, 	Cvar_Changed);
+	HookConVarChange(g_cVBigMapCredits, 	Cvar_Changed);
 
 	if(VIP_IsVIPLoaded())
 		VIP_OnVIPLoaded();
@@ -89,7 +89,6 @@ public void Cvar_Changed(ConVar convar, const char[] oldValue, const char[] newV
 public void OnMapStart()
 {
 	GetCurrentMap(currentMap, sizeof(currentMap));
-	GetMapMinPlayers(currentMap);
 }
 
 public Action Event_RoundEnd(Event event, const char[] name, bool dontBroadcast)
